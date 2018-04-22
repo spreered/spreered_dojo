@@ -1,0 +1,2 @@
+module Admim::UsersHelper
+end
