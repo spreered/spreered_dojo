@@ -31,11 +31,10 @@
       </ul>
 
       <ul class="navbar-nav ">
+        
+        <% if current_user %>
         <li class="nav-item">
-          <a class="nav-link" href="#">login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">email</a>
+          <span class="navbar-text"><%=  current_user.email %></span>   
         </li> 
         <li class="nav-item">
           <a class="nav-link" href="#">profile</a>
@@ -44,8 +43,16 @@
           <a class="nav-link" href="#">後台</a>
         </li> 
         <li class="nav-item">
-          <a class="nav-link" href="#">logout</a>
-        </li>    
+          <%=link_to '登出', destroy_user_session_path, method: :delete, class:'nav-link' %>
+        </li>
+        <%else%>
+        <li class="nav-item">
+          <%= link_to '登入', new_user_session_path ,class:'nav-link'%>
+        </li>
+        <li>
+          <%= link_to '註冊', new_user_registration_path,class:'nav-link' %>
+        </li>
+        <%end%>    
       </ul>
 
     </div>
