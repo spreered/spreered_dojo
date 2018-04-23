@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <h1>Post show</h1>
+  <div class="row">
+    <div class="col-3">User : <%= @post.author.name %></div>
+    <div class="col-9">
+      <ul>
+        <li>image : <%=image_tag @post.image %></li>
+        <li>title : <%= @post.title %></li>
+        <li>content : <%=simple_format @post.content %></li>
+        
+      </ul>
+      <%= link_to edit_post_path(@post) do %>
+        <div class="btn btn-outline-secondary"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+      <%end%>
+      <%= link_to post_path(@post), method: :delete, data:{confirm:'Are you sure?'} do%>
+        <div class="btn btn-outline-secondary"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
+      <%end%>
+
+    </div>
+  </div>
+
+  
+</div>
