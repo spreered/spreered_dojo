@@ -1,0 +1,36 @@
+<div class="container">
+  <h1>使用者清單</h1>
+  <nav class="nav nav-pills nav-justified"">
+    <%=link_to 'Category', admin_categories_path, class:'nav-link'%>
+    <a class="nav-link active" href="#">User</a>
+  </nav>
+
+  <table class="table mt-3">
+    <thead class="">
+      <tr>
+        <th scope="col">Name</th>
+        <th sope="col">Email</th>
+        <th class="user-table-control" scope="col"> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %> 
+      <tr>
+        <td ><%= user.name %></td>
+        <td ><%= user.email %></td>
+        <td class="user-table-control">
+          <% if user.email != 'admin@example.com' %>
+            <%= simple_form_for [:admin,user], wrapper: :inline_form, html:{class:'form-inline'} do |f| %>
+            <%= f.error_notification %>
+            <%= f.input :role, as: :select, collection: [['admin', '管理員'], ['normal', '正常人']], label_method: :second, value_method: :first %>
+            <%= f.button :submit ,'update', class: 'btn btn-outline-primary ml-1' %>
+            <%end%>
+          <%end%>
+        </td>
+      </tr>
+      <%end%>
+    </tbody>
+  </table>
+
+
+</div> 

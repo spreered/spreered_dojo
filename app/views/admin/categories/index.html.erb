@@ -1,9 +1,9 @@
 <div class="container">
-  <h1>後台首頁</h1>
+  <h1>編輯文章類別</h1>
 
   <nav class="nav nav-pills nav-justified"">
     <a class="nav-link active" href="#">Category</a>
-    <a class="nav-link" href="#">User</a>
+    <%=link_to 'User', admin_users_path, class:'nav-link'%>
   </nav>
   <div class="mt-5">
     <%= simple_form_for [:admin,@category], wrapper: :inline_form, html:{class:'form-inline'} do |f| %>
@@ -12,21 +12,21 @@
       <%= f.button :submit ,'Create', class: 'btn btn-outline-primary ml-1' %>
     <%end%>
     <table class="table mt-3">
-    <thead class="">
-      <tr>
-        <th scope="col">name</th>
-        <th class="category-table-control" scope="col"> </th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @categories.each do |category| %> 
-      <tr data-id="<%=category.id%>">
-        <td class="category-table-name"><%= category.name %></td>
-        <td class="category-table-control"><i class="category-edit-btn fa mr-2 fa-pencil-square-o" aria-hidden="true"></i> <i class="category-delete-btn fa fa-trash" aria-hidden="true"></i></td>
-      </tr>
-      <%end%>
-    </tbody>
-  </table>
+      <thead class="">
+        <tr>
+          <th scope="col">name</th>
+          <th class="category-table-control" scope="col"> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @categories.each do |category| %> 
+        <tr data-id="<%=category.id%>">
+          <td class="category-table-name"><%= category.name %></td>
+          <td class="category-table-control"><i class="category-edit-btn fa mr-2 fa-pencil-square-o" aria-hidden="true"></i> <i class="category-delete-btn fa fa-trash" aria-hidden="true"></i></td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
   </div>
   
 </div>  
