@@ -10,8 +10,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-3 border p-4"><%=rect_avatar @post.author.avatar %>
-      <div class="user-show-name text-center mt-2 "><h5><%= @post.author.name %></h5>  </div>
+    <div class="col-3 border p-4">
+      <%= render partial:'/share/post_user_block',locals:{ user: @post.author } %>
       </div>
     <div class="col-9 border p-4">
       <div class="post-show-field">
