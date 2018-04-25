@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>edit profile</h1>
+  <%= simple_form_for @user do |f|%>
+    <%= f.input :name, label:'姓名' %>
+    <%= f.input :description, label:'關於我' %>
+    <%= f.input :avatar, label:'圖片' %>
+    <%= f.button :submit,'確認', class:"btn btn-outline-secondary" %>
+  <%end%>
+</div>

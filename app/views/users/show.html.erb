@@ -1,0 +1,29 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <div class="user-show-avatar">
+          <div class="imgbox">    
+          <!--設定寬度-->
+            <div class="imgbox-inner">
+              <!--推padding-->
+              <div class="imgbox-fit">
+                <!--設定absolute-->
+                 <%=image_tag @user.avatar%>
+                <!--設定object-fit:cover-->
+              </div>
+            </div>
+          </div>
+      </div>
+        <div class="user-show-name text-center mt-2 "><h3><%= @user.name%> </h3> </div>
+      </div>
+      <div class="col-9">
+        <div class="user-show-description"><%=simple_format @user.description%></div> 
+        <div class="user-show-control">
+          <%= link_to '編輯', edit_user_path(@user), class:'btn btn-outline-primary float-right' %>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -34,7 +34,7 @@
           <span class="navbar-text"><%=  current_user.email %></span>   
         </li> 
         <li class="nav-item">
-          <a class="nav-link" href="#">profile</a>
+          <%=link_to 'profile', user_path(current_user), class: 'nav-link' %>
         </li> 
         <% if current_user.admin? %>
         <li class="nav-item">
