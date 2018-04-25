@@ -1,20 +1,29 @@
 <div class="container mt-5">
-  <h1>Post show</h1>
   <div class="row">
-    <div class="col-3">User : <%= @post.author.name %></div>
-    <div class="col-9">
-      <ul>
-        <li>image : <%=image_tag @post.image %></li>
-        <li>title : <%= @post.title %></li>
-        <li>content : <%=simple_format @post.content %></li>
-        
-      </ul>
-      <%= link_to edit_post_path(@post) do %>
-        <div class="btn btn-outline-secondary"><i class="fa fa-pencil" aria-hidden="true"></i></div>
+    <div class="col-12 post-show-header">
+      <div class="post-show-tilte mr-auto"><h1><%= @post.title %></h1></div>
+      <div class="post-show-control">
+        <a class="btn btn-outline-primary mr-1 align-self-center">collect</a>
+      <a class="btn btn-outline-primary align-self-center">comment</a>
+      </div>
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3 border p-4"><%=rect_avatar @post.author.avatar %>
+      <div class="user-show-name text-center mt-2 "><h5><%= @post.author.name %></h5>  </div>
+      </div>
+    <div class="col-9 border p-4">
+      <div class="post-show-field">
+        <div class="post-show-img"><%=image_tag @post.image %></div>
+        <div class="post-show-content"><%=simple_format @post.content %></div>
+      </div>
+      <div class="float-right"><%= link_to edit_post_path(@post) ,class:'btn btn-outline-secondary' do %><span class="fa fa-pencil" aria-hidden="true"></span>
       <%end%>
-      <%= link_to post_path(@post), method: :delete, data:{confirm:'Are you sure?'} do%>
-        <div class="btn btn-outline-secondary"><i class="fa fa-trash-o" aria-hidden="true"></i></div>
-      <%end%>
+      <%= link_to post_path(@post), method: :delete, data:{confirm:'Are you sure?'} ,class:'btn btn-outline-secondary' do%>
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+      <%end%></div>
+      
 
     </div>
   </div>

@@ -44,3 +44,22 @@ th.user-table-control {
 .user-show-name{
   width: 100%;
 }
+.post-show-header{
+  background-color: #e3f2fd;
+  padding: 10px;
+  display: flex;
+  height: 68px;
+  vertical-align: middle;
+}
+.post-show-title{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0 ;
+}
+.post-show-control{
+  display: flex;
+  flex-direction: row;
+}
+.post-show-img img{
+  max-height: 400px;
+}
