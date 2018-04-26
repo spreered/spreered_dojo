@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   mount_uploader :avatar, AvatarUploader
   has_many :posts, foreign_key: 'author_id', dependent: :destroy
-
+  has_many :comments, foreign_key: 'author_id', dependent: :destroy
 
   def admin?
     self.role=='admin'

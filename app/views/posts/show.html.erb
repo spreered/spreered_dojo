@@ -10,23 +10,56 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-3 border p-4">
-      <%= render partial:'/share/post_user_block',locals:{ user: @post.author } %>
+    <div class="col-3 border p-5">
+      <div class="m-4"> <%= render partial:'/share/post_user_block',locals:{ user: @post.author } %></div>
+     
       </div>
     <div class="col-9 border p-4">
       <div class="post-show-field">
         <div class="post-show-img"><%=image_tag @post.image %></div>
         <div class="post-show-content"><%=simple_format @post.content %></div>
       </div>
+      <% if @post.author == current_user %>
       <div class="float-right"><%= link_to edit_post_path(@post) ,class:'btn btn-outline-secondary' do %><span class="fa fa-pencil" aria-hidden="true"></span>
       <%end%>
       <%= link_to post_path(@post), method: :delete, data:{confirm:'Are you sure?'} ,class:'btn btn-outline-secondary' do%>
         <i class="fa fa-trash-o" aria-hidden="true"></i>
       <%end%></div>
-      
-
+      <%end%>
     </div>
   </div>
 
-  
+  <!-- show comment -->
+  <%@comments.each do |comment| %>
+  <div class="row bg-light">
+    <div class="col-3 border p-5">
+       <div class="m-4">
+        <%= render partial:'/share/post_user_block',locals:{ user: comment.author } %>
+      </div>
+      </div>
+    <div class="col-9 border p-4">
+      <div class="post-show-field">
+        <div class="post-show-content"><%=simple_format comment.content %></div>
+      </div>
+      <% if comment.author == current_user %>
+      <div class="float-right"><%= link_to edit_post_comment_path(@post,comment) ,class:'btn btn-outline-secondary' do %><span class="fa fa-pencil" aria-hidden="true"></span>
+      <%end%>
+      <%= link_to post_comment_path(comment), method: :delete, data:{confirm:'Are you sure?'} ,class:'btn btn-outline-secondary' do%>
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
+      <%end%></div>
+      <%end%>
+    </div>
+  </div>
+  <%end%>
+  <!-- post commnet -->
+
+
+  <div class="row d-flex justify-content-center p-3 mb-5  border">
+      <div class="post-comment">
+        <%= simple_form_for [@post,@comment] do |f| %>
+        <%=f.input :content , label: false,placeholder: 'add comment'%>
+        <%=f.button :submit,class:'btn btn-outline-secondary' %>
+        <%end%>
+      </div>
+    </div>
 </div>

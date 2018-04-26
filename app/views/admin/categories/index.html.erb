@@ -36,7 +36,7 @@
   $('.category-delete-btn').on('click',(e) =>{
     var category_id = e.target.parentNode.parentNode.dataset.id;
     $.ajax({
-      url: "categories/" + category_id,
+      url: "../admin/categories/" + category_id,
       method: "DELETE",
       dataType: "json",
       success: function(data) {
@@ -49,7 +49,7 @@
     var category_id = e.target.parentNode.parentNode.dataset.id;
     console.log(category_id);
     $.ajax({
-      url: "categories/" + category_id + "/edit",
+      url: "/admin/categories/" + category_id + "/edit",
       method: "GET",
       dataType: "json",
       success: function(data) {
@@ -60,7 +60,7 @@
           e.preventDefault();
           console.log(textColumn.find(".update-name").val());
           $.ajax({
-            url: "categories/" + category_id,
+            url: "/admin/categories/" + category_id,
             method: "PATCH",
             dataType: "json",
             data: { 
