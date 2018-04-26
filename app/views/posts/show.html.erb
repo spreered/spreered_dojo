@@ -36,17 +36,20 @@
        <div class="m-4">
         <%= render partial:'/share/post_user_block',locals:{ user: comment.author } %>
       </div>
-      </div>
-    <div class="col-9 border p-4">
+    </div>
+    <div class="col-9 border p-4"  data-id="<%=comment.id%>">
       <div class="post-show-field">
         <div class="post-show-content"><%=simple_format comment.content %></div>
       </div>
       <% if comment.author == current_user %>
-      <div class="float-right"><%= link_to edit_post_comment_path(@post,comment) ,class:'btn btn-outline-secondary' do %><span class="fa fa-pencil" aria-hidden="true"></span>
-      <%end%>
-      <%= link_to post_comment_path(comment), method: :delete, data:{confirm:'Are you sure?'} ,class:'btn btn-outline-secondary' do%>
+      <div class="float-right"> 
+        <div class="btn btn-outline-secondary comment-edit-btn"><span class="fa fa-pencil" aria-hidden="true"></span></div>
+        <%= link_to edit_post_comment_path(@post,comment) ,class:'btn btn-outline-secondary' do %><span class="fa fa-pencil" aria-hidden="true"></span>
+        <%end%>
+        <%= link_to post_comment_path(comment), method: :delete, data:{confirm:'Are you sure?'} ,class:'btn btn-outline-secondary' do%>
         <i class="fa fa-trash-o" aria-hidden="true"></i>
-      <%end%></div>
+        <%end%>
+      </div>
       <%end%>
     </div>
   </div>
@@ -63,3 +66,58 @@
       </div>
     </div>
 </div>
+
+
+<script>
+  if($('.comment-edit-btn').length >0){
+    $('.comment-edit-btn').on('click',(e) =>{
+      var comment_id = e.currentTarget.parentNode.parentNode.dataset.id;
+      console.log(comment_id);
+      $.ajax({
+        url: "/posts/<%=@post.id%>/comments/"+ comment_id + "/edit",
+        method: "GET",
+        dataType: "json",
+        success: function(data) {
+          var textColumn = $("[data-id=" + comment_id + "]").find(".post-show-content");
+          textColumn.html($("#edit-template").html());
+          textColumn.find(".update-content").val(data["content"]);
+          textColumn.on("click",".update-button", (e)=>{
+            e.preventDefault();
+            console.log(textColumn.find(".update-content").val());
+            $.ajax({
+              url: "/posts/<%=@post.id%>/comments/" + comment_id,
+              method: "PATCH",
+              dataType: "json",
+              data: { 
+                comment : {
+                  content : textColumn.find(".update-content").val()
+                }
+              },
+              success: function(updateData) {
+                console.log(updateData)
+                let textColumn = $("[data-id=" + comment_id + "]").find(".post-show-content");
+                textColumn.html(updateData["content"]);
+              }
+            });
+          });
+        }
+
+      });
+    });
+  }
+  
+
+</script>
+
+<script type="text/template" id="edit-template">
+
+  <form>
+    <div class="form-group text optional comment_content">
+      <textarea class="form-control text optional update-content" placeholder="add comment" name="comment[content]" ></textarea>
+    </div>
+        <button class="btn btn-outline-secondary update-button" type="button">update</button>
+    </div>
+
+    
+  </form>
+</script>
