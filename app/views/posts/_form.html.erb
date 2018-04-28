@@ -3,5 +3,6 @@
     <%= f.input :content, label:'文章內容' %>
     <%= f.input :image, label:'圖片' %>
     <%= f.association :categories, as: :check_boxes %>
-    <%= f.button :submit,'發文', class:"btn btn-outline-secondary" %>
+    <%= f.button :submit,'draft', class:"btn btn-outline-secondary" %>
+    <%= f.button :submit,'publish', class:"btn btn-outline-secondary" %>
 <%end%>

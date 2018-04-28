@@ -17,6 +17,7 @@ class PostsController < ApplicationController
   end
   def create
     @post = current_user.posts.build(post_params)
+    @post.published_at = Time.zone.now if publishing?
     if @post.save!
       redirect_to post_path(@post)
     else
@@ -27,6 +28,8 @@ class PostsController < ApplicationController
   def edit
   end
   def update
+    @post.published_at = Time.zone.now if publishing?
+    @post.published_at = nil if saving_as_draft?
     if @post.update!(post_params)
       flash[:notice] = '文章更新成功'
       redirect_to post_path(@post)
@@ -71,6 +74,13 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title,:content,:image,category_ids:[] )
   end
 
+  def publishing?
+    params[:commit] == 'publish'
+  end
+
+  def saving_as_draft?
+    params[:commit] == 'draft'
+  end
 
 
 end
