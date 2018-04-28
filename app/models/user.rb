@@ -6,6 +6,8 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   has_many :posts, foreign_key: 'author_id', dependent: :destroy
   has_many :comments, foreign_key: 'author_id', dependent: :destroy
+  has_many :collects, dependent: :destroy
+  has_many :collect_posts, through: :collect, source: :post
 
   def admin?
     self.role=='admin'

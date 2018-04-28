@@ -1,2 +1,0 @@
-class UserCollect < ApplicationRecord
-end

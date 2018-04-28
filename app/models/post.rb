@@ -5,4 +5,9 @@ class Post < ApplicationRecord
   has_many :comments
   has_many :post_categories, dependent: :destroy
   has_many :categories, through: :post_categories
+  has_many :collects, dependent: :destroy
+  has_many :collect_users, through: :collects, source: :user
+  def is_collected?(user)
+    self.collect_users.include?(user)
+  end
 end

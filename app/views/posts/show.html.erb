@@ -3,8 +3,8 @@
     <div class="col-12 post-show-header">
       <div class="post-show-tilte mr-auto"><h1><%= @post.title %></h1></div>
       <div class="post-show-control">
-        <a class="btn btn-outline-primary mr-1 align-self-center">collect</a>
-      <a class="btn btn-outline-primary align-self-center">comment</a>
+        <%=collect_btn(@post) %>
+        <a class="btn btn-outline-primary align-self-center">comment</a>
       </div>
       
     </div>
