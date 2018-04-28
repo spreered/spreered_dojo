@@ -8,6 +8,8 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments
+    @post.view_count += 1
+    @post.save!
   end
 
   def new
