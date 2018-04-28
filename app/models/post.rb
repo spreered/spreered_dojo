@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   has_many :categories, through: :post_categories
   has_many :collects, dependent: :destroy
   has_many :collect_users, through: :collects, source: :user
+  enum who_can_see: [:all_user,:friend,:myself]
   def is_collected?(user)
     self.collect_users.include?(user)
   end
