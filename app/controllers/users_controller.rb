@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   def show
+    @posts = @user.posts.published
   end
   def edit
   end
@@ -12,6 +13,21 @@ class UsersController < ApplicationController
       flash[:alert] = '更新失敗'
       render edit_user_path(@user)
     end
+  end
+
+  def post
+  end
+
+  def collect
+  end
+
+  def comment
+  end
+
+  def draft
+  end
+
+  def friend
   end
 
   private

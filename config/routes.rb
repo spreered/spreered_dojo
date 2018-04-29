@@ -10,7 +10,15 @@ Rails.application.routes.draw do
       post :uncollect
     end
   end
-  resources :users, only:[:show, :edit, :update]
+  resources :users, only:[:show, :edit, :update] do
+    member do
+     get :post
+     get :collect
+     get :comment
+     get :draft
+     get :friend
+   end
+  end
   namespace :admin do 
     root "categories#index"
     resources :categories

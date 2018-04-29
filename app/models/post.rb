@@ -8,6 +8,10 @@ class Post < ApplicationRecord
   has_many :collects, dependent: :destroy
   has_many :collect_users, through: :collects, source: :user
   enum who_can_see: [:all_user,:friend,:myself]
+
+  scope :published, -> {
+    where('published_at IS NOT NULL')
+  }
   def is_collected?(user)
     self.collect_users.include?(user)
   end

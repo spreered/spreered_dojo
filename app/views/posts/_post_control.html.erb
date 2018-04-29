@@ -1,0 +1,7 @@
+<% if post.author == current_user %>
+  <div class="float-right"><%= link_to edit_post_path(post) ,class:'btn btn-outline-secondary' do %><span class="fa fa-pencil" aria-hidden="true"></span>
+  <%end%>
+  <%= link_to post_path(post), method: :delete, data:{confirm:'Are you sure?'} ,class:'btn btn-outline-secondary' do%>
+    <i class="fa fa-trash-o" aria-hidden="true"></i>
+  <%end%></div>
+<%end%>
