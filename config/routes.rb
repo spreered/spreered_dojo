@@ -12,12 +12,17 @@ Rails.application.routes.draw do
   end
   resources :users, only:[:show, :edit, :update] do
     member do
-     get :post
-     get :collect
-     get :comment
-     get :draft
-     get :friend
-   end
+     get :post_page
+     get :collect_page
+     get :comment_page
+     get :draft_page
+     get :friend_page
+     post :invite_friendship
+     post :cancel_inviting
+     post :unfriend
+     post :accept_frienship
+     post :ignore_frienship
+    end
   end
   namespace :admin do 
     root "categories#index"

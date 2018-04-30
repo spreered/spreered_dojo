@@ -1,0 +1,1 @@
+$('[data-user = <%=@user.id%> ]').find('.friendships_btn').html("<%= j(render partial:'/share/friendship_btn',locals:{user: @user})%>");

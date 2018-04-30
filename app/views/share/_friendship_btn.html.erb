@@ -1,0 +1,14 @@
+<% case current_user.friendship_status(user) %>
+<% when :friend %>
+  <%=button_to 'Unfriend', unfriend_user_path(user), remote: true,class: 'btn btn-outline-secondary' %>
+<% when :inviting%>
+  <%=button_to 'Cancel inviting', cancel_inviting_user_path(user),remote: true, class: 'btn btn-outline-secondary' %>
+<% when :inviter %>
+  <%=button_to 'Accept Friendship', accept_frienship_user_path(user),remote: true, class: 'btn btn-outline-secondary' %>
+  <%=button_to 'Ignore Friendship', ignore_frienship_user_path(user),remote: true, class: 'btn btn-outline-secondary' %>
+<% when :can_invite %>
+  <%=button_to 'Add Friend', invite_friendship_user_path(user),remote: true, class: 'btn btn-outline-secondary' %>
+<% else %>
+  <div class=""></div>
+<%end %>
+  
