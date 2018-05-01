@@ -71,7 +71,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title,:content,:image,category_ids:[] )
+    params.require(:post).permit(:title,:content,:image,:who_can_see,category_ids:[])
   end
 
   def publishing?

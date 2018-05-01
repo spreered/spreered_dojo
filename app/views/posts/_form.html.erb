@@ -1,8 +1,9 @@
 <%= simple_form_for @post do |f|%>
     <%= f.input :title, label:'標題' %>
     <%= f.input :content, label:'文章內容' %>
-    <%= f.input :image, label:'圖片' %>
-    <%= f.association :categories, as: :check_boxes %>
+    <%= f.input :image, label:'圖片：' %>
+    <%= f.input :who_can_see,label:'Who can see：', as: :radio_buttons, collection: [['all_user', 'All'], ['friend', 'Friend'], ['myself', 'Myself']], label_method: :second, value_method: :first %>
+    <%= f.association :categories, as: :check_boxes, label: '分類：' %>
     <%= f.button :submit,'draft', class:"btn btn-outline-secondary" %>
     <%= f.button :submit,'publish', class:"btn btn-outline-secondary" %>
 <%end%>

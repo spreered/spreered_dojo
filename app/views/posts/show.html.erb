@@ -4,7 +4,7 @@
       <div class="post-show-title mr-auto"><% if !@post.published_at%>(draft)<%end%><h1><%= @post.title %></h1></div>
       <div class="post-show-control">
         <%=collect_btn(@post) %>
-        <a class="btn btn-outline-primary align-self-center">comment</a>
+        <a href="#post-comment" class="btn btn-outline-primary align-self-center">comment</a>
       </div>
       
     </div>
@@ -50,7 +50,7 @@
 
 
   <div class="row d-flex justify-content-center p-3 mb-5  border">
-      <div class="post-comment">
+      <div class="post-comment" id="post-comment">
         <%= simple_form_for [@post,@comment] do |f| %>
         <%=f.input :content , label: false,placeholder: 'add comment'%>
         <%=f.button :submit,class:'btn btn-outline-secondary' %>
