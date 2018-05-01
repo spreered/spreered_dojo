@@ -28,6 +28,7 @@ class UsersController < ApplicationController
   end
 
   def draft_page
+    @posts = @user.posts.find_draft
   end
 
   def friend_page

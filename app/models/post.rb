@@ -12,6 +12,9 @@ class Post < ApplicationRecord
   scope :published, -> {
     where('published_at IS NOT NULL')
   }
+  scope :find_draft, -> {
+    where('published_at IS NULL')
+  }
   scope :all_can_see, -> {
     where(who_can_see: :all_user)
   }

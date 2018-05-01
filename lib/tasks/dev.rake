@@ -60,7 +60,7 @@ namespace :dev do
 
   task fake_comment: :environment do   
     Comment.destroy_all
-    Post.all_can_see.each do |post|
+    Post.published.all_can_see.each do |post|
       users = User.all.sample(5)
       users.each do |user|
         post.comments.create(
@@ -90,7 +90,7 @@ namespace :dev do
   task fake_collect: :environment do
     Collect.destroy_all
     User.all.each do |user|
-      posts = Post.all_can_see.sample(10)
+      posts = Post.published.all_can_see.sample(10)
       posts.each do |post|
         user.collect_posts<< post
       end

@@ -20,7 +20,16 @@
         <%= link_to 'My Friend', friend_page_user_path(@user) , class:'nav-link'%>
       </li>
     </ul>
-
+    <table class="table mt-3 mb-5">
+      <% @posts.each do |post| %>
+        <tr>
+          <th><%= link_to post.title, post_path(post)  %></th>
+          <td>draft</td>
+          <td><%=post.published_at%></td>
+          <td><%= render partial:'/posts/post_control', locals:{post: post} %></td>
+        </tr>
+      <%end%>
+    </table>
   </div>
 
 </div>

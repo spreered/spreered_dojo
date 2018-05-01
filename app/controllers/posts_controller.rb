@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :collect, :uncollect]
   def index
-    @posts = Post.page(params[:page]).per(20)
+    @posts = Post.published.page(params[:page]).per(20)
   end
 
   def show
+    #要檢查可不可以看
     @post = Post.find(params[:id])
     @comment = Comment.new
     @comments = @post.comments
