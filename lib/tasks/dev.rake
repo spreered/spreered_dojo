@@ -84,6 +84,17 @@ namespace :dev do
         end
       end
     end
-    puts "new have #{Friendship.count} friendships"
+    puts "now have #{Friendship.count} friendships"
+  end
+
+  task fake_collect: :environment do
+    Collect.destroy_all
+    User.all.each do |user|
+      posts = Post.all_can_see.sample(10)
+      posts.each do |post|
+        user.collect_posts<< post
+      end
+    end
+    puts "now have #{Collect.count} collects"
   end
 end

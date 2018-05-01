@@ -1,2 +1,2 @@
-$('.uncollect-btn').remove();
-$('.post-show-control').prepend("<%= j(collect_btn(@post))%>")
+$('.post-show-control[data-pid="<%=@post.id%>"] .uncollect-btn').remove();
+$('.post-show-control[data-pid="<%=@post.id%>"]').prepend("<%= j(collect_btn(@post))%>")

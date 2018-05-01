@@ -24,9 +24,7 @@
       <% @posts.each do |post| %>
         <tr>
           <th><%= link_to post.title, post_path(post)  %></th>
-          <td>published</td>
-          <td><%=post.published_at%></td>
-          <td><%= render partial:'/posts/post_control', locals:{post: post} %></td>
+          <td><div class="post-show-control" data-pid=<%=post.id %>><%=collect_btn(post) %></div></td>
         </tr>
       <%end%>
     </table>
