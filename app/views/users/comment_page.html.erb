@@ -21,16 +21,77 @@
       </li>
     </ul>
     <table class="table mt-3 mb-5">
-      <%# @posts.each do |post| %>
-        <tr>
-          <th><%#= link_to post.title, post_path(post)  %></th>
-          <td>published</td>
-          <td><%#=post.published_at%></td>
-          <td><%#= render partial:'/posts/post_control', locals:{post: post} %></td>
+      <% @comments.each do |comment| %>
+        <tr data-pid= <%= comment.post.id %> data-cid = <%=comment.id%> >
+          <th><strong><%=link_to comment.post.title, post_path(comment.post) %></strong> <br>
+            <div class="user-comment-content" >
+              <%= comment.content%>
+            </div>
+            </th>
+          <td><%=comment.updated_at%></td>
+          <td><%= render partial:'/posts/comment_control', locals:{comment: comment} %></td>
         </tr>
-      <%#end%>
+      <%end%>
     </table>
 
   </div>
 
 </div>
+
+<script>
+  if($('.comment-edit-btn').length >0){
+    $('.comment-edit-btn').on('click',(e) =>{
+      var comment_id = e.currentTarget.parentNode.parentNode.dataset.cid;
+      var post_id = e.currentTarget.parentNode.parentNode.dataset.pid;
+      console.log(comment_id);
+      console.log(post_id);
+      $.ajax({
+        url: "/posts/"+post_id+"/comments/"+ comment_id + "/edit",
+        method: "GET",
+        dataType: "json",
+        success: function(data) {
+          var textColumn = $("[data-cid=" + comment_id + "]").find(".user-comment-content");
+          textColumn.html($("#edit-template").html());
+          textColumn.find(".update-content").val(data["content"]);
+          textColumn.on("click",".update-button", (e)=>{
+            e.preventDefault();
+            console.log(textColumn.find(".update-content").val());
+            $.ajax({
+              url: "/posts/"+post_id+"/comments/" + comment_id,
+              method: "PATCH",
+              dataType: "json",
+              data: { 
+                comment : {
+                  content : textColumn.find(".update-content").val()
+                }
+              },
+              success: function(updateData) {
+                console.log(updateData)
+                let textColumn = $("[data-cid=" + comment_id + "]").find(".user-comment-content");
+                textColumn.html(updateData["content"]);
+              }
+            });
+          });
+        }
+
+      });
+    });
+  }
+  
+
+</script>
+
+
+
+<script type="text/template" id="edit-template">
+
+  <form>
+    <div class="form-group text optional comment_content">
+      <textarea class="form-control text optional update-content" placeholder="add comment" name="comment[content]" ></textarea>
+    </div>
+        <button class="btn btn-outline-secondary update-button" type="button">update</button>
+    </div>
+
+    
+  </form>
+</script>
