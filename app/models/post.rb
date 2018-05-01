@@ -12,6 +12,9 @@ class Post < ApplicationRecord
   scope :published, -> {
     where('published_at IS NOT NULL')
   }
+  scope :all_can_see, -> {
+    where(who_can_see: :all_user)
+  }
   def is_collected?(user)
     self.collect_users.include?(user)
   end
