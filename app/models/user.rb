@@ -23,6 +23,12 @@ class User < ApplicationRecord
   def is_friend?(user)
     self.friends.include?(user)
   end
+  def inviting_friends
+    self.friendships_invitees.where('friendships.is_friend = ?', false)
+  end
+  def inviting_me_friends
+    self.friendships_inviters.where('friendships.is_friend = ? ', false)
+  end
 
   def friendship_status(user)
     if user == self 

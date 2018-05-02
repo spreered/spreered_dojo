@@ -23,4 +23,28 @@
 
   </div>
 
+  <div class="row">
+    <div class="title col-12">  <h2>wating for response</h2></div>
+    <%@inviting_friends.each do  |friend| %>
+      <div class="col-2 p-3">
+        <%=render partial:'/share/post_user_block', locals:{user: friend} %>
+      </div>
+    <%end%>
+  </div>
+  <div class="row mt-2">
+    <div class="title col-12">  <h2>inviting me</h2></div>
+    <%@inviting_me_friends.each do  |friend| %>
+      <div class="col-2 p-3">
+        <%=render partial:'/share/post_user_block', locals:{user: friend} %>
+      </div>
+    <%end%>
+  </div>
+  <div class="row mt-2">
+    <div class="title col-12">  <h2>friend</h2></div>
+    <%@friends.each do  |friend| %>
+      <div class="col-2 p-3">
+        <%=render partial:'/share/post_user_block', locals:{user: friend} %>
+      </div>
+    <%end%>
+  </div>
 </div>

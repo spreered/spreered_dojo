@@ -32,6 +32,9 @@ class UsersController < ApplicationController
   end
 
   def friend_page
+    @inviting_me_friends = @user.inviting_me_friends
+    @inviting_friends = @user.inviting_friends
+    @friends = @user.friends
   end
 
   def invite_friendship
