@@ -1,16 +1,26 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :collect, :uncollect]
+  before_action :check_author, only: [:edit, :update, :destroy]
   def index
-    @posts = Post.published.page(params[:page]).per(20)
+    if current_user
+      @posts = Post.published.all_user.or(Post.published.friend_post(current_user).friend).page(params[:page]).per(20)
+      ##@posts = Post.all.can_see_by(current_user).page(params[:page]).per(20)
+    else
+      @posts = Post.published.page(params[:page]).per(20)
+    end
   end
 
   def show
     #要檢查可不可以看
-    @post = Post.find(params[:id])
-    @comment = Comment.new
-    @comments = @post.comments
-    @post.view_count += 1
-    @post.save!
+    if !@post.can_see_by?(current_user)
+      flash[:alert] = 'access denied!'
+      redirect_back(fallback_location: root_path)
+    else
+      @comment = Comment.new
+      @comments = @post.comments
+      @post.view_count += 1
+      @post.save!
+    end
   end
 
   def new
@@ -28,6 +38,7 @@ class PostsController < ApplicationController
 
   def edit
   end
+
   def update
     @post.published_at = Time.zone.now if publishing?
     @post.published_at = nil if saving_as_draft?
@@ -81,6 +92,13 @@ class PostsController < ApplicationController
 
   def saving_as_draft?
     params[:commit] == 'draft'
+  end
+
+  def check_author
+    if @post.author != current_user
+      flash[:alert] = 'access denied'
+      redirect_back(fallback_location: root_path)
+    end
   end
 
 

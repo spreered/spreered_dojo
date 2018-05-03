@@ -1,7 +1,6 @@
 <div class="container mt-2">
-  <h1>前台首頁</h1>
-
-  <table class="table mt-3">
+  <div class="row">
+      <table class="table mt-3">
     <thead class="">
       <tr>
         <th scope="col">Replies count</th>
@@ -14,13 +13,18 @@
       <% @posts.each do |post| %> 
       <tr>
         <td ><%= post.replies_count.to_i %></td>
-        <td ><%=link_to post.title,post_path(post) %></td>
+        <td ><%=content_tag :span, 'friend only' ,class:'badge badge-pill badge-warning' if post.friend?%><%=link_to post.title,post_path(post) %> </td>
         <td ><%= post.updated_at %></td>
         <td ><%= post.view_count.to_i %></td>
       </tr>
       <%end%>
 
     </tbody>
+
   </table>
 
+  </div>
+  <div class="row justify-content-md-center mt-1 mb-4">
+    <div class="col-md-auto"><%=paginate @posts, theme: 'twitter-bootstrap-4' %></div>
+  </div>
 </div>

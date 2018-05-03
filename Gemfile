@@ -43,6 +43,7 @@ gem 'pry-rails'
 gem 'pry-nav'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.3'
 gem 'bootstrap', '~> 4.1.0'
+gem 'bootstrap4-kaminari-views'
 
 
 

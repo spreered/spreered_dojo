@@ -60,7 +60,7 @@ namespace :dev do
 
   task fake_comment: :environment do   
     Comment.destroy_all
-    Post.published.all_can_see.each do |post|
+    Post.published.all_user.each do |post|
       users = User.all.sample(5)
       users.each do |user|
         post.comments.create(
