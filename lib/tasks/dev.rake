@@ -97,4 +97,15 @@ namespace :dev do
     end
     puts "now have #{Collect.count} collects"
   end
+
+  task update_chatterbox_count: :environment do
+    User.all.each do |user|
+      count = 0
+      user.posts.each do |post|
+        count += post.replies_count
+      end
+      user.update(chatterbox_count: count)
+      puts "user : #{user.name} chatterbox_count: #{user.chatterbox_count}"
+    end
+  end
 end

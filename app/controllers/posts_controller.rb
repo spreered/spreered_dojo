@@ -77,6 +77,14 @@ class PostsController < ApplicationController
     end
   end
 
+  def feeds
+    @user_number = User.all.count
+    @post_number = Post.all.count
+    @comment_number = Comment.all.count
+    @chatter_rank_users = User.order(chatterbox_count: :desc).limit(10)
+    @reply_rank_posts = Post.order(replies_count: :desc).limit(10)
+  end
+
   private
   def set_post
     @post = Post.find(params[:id])

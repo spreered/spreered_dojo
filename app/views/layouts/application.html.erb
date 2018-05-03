@@ -18,10 +18,10 @@
     <div class="collapse navbar-collapse" id="forum_menu">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">Feeds <span class="sr-only">(current)</span></a>
+          <%= link_to 'Feeds', feeds_path, class:'nav-link'%>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">All Post</a>
+          <%= link_to 'All Post', posts_path, class:'nav-link'%>
         </li>        
         <li class="nav-item">
           <%=link_to 'New Post', new_post_path, class:'nav-link'%>

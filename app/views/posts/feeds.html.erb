@@ -1,0 +1,46 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col">
+        <h1 class="text-center">User</h1>
+        <div class=" bg-light mt-4"><h2 class="text-center"><%= @user_number %></h2></div>
+      </div>
+      <div class="col">
+        <h1 class="text-center">Post</h1>
+        <div class=" bg-light mt-4"><h2 class="text-center"><%= @post_number%></h2></div>
+      </div>
+      <div class="col">
+        <h1 class="text-center">Comment</h1>
+        <div class=" bg-light mt-4"><h2 class="text-center"><%= @comment_number%></h2></div>
+      </div>
+    </div> 
+  </div>
+</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-5  p-5">
+      <div class="feeds-item-title">
+        <h2 class="text-center">Chatterbox</h2>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-auto pt-3">      
+          <ol>
+            <% @chatter_rank_users.each do |user| %>
+            <li class="p-1 chatterbox-rank-item"><%=link_to user.name,user_path(user)%> : <%= user.chatterbox_count %></li>
+            <%end%>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <div class="col-5 p-5">
+      <div class="feeds-item-title">
+        <h2 class="text-center">Most Popular Post</h2>
+      </div>
+      <ol>
+        <% @reply_rank_posts.each do |post| %>
+        <li> <%=link_to post.title, post_path(post) %> , <%=post.updated_at.strftime("%Y-%m-%d") %></li>
+        <%end%>
+      </ol>
+    </div>
+  </div>
+</div>
