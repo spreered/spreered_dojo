@@ -23,7 +23,7 @@ class PostsController < ApplicationController
       redirect_back(fallback_location: root_path)
     else
       @comment = Comment.new
-      @comments = @post.comments
+      @comments = @post.comments.page(params[:page]).per(20)
       @post.view_count += 1
       @post.save! 
     end
