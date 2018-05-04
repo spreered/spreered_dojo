@@ -20,8 +20,12 @@ class Admin::CategoriesController < Admin::BaseController
     render json: { id: @category.id, name: @category.name }
   end
   def destroy
-    @category.destroy
-    render json: {id:@category.id}
+    if @category.posts.count > 0
+      render json: {message:'denied'}
+    else
+      @category.destroy
+      render json: {message:'ok'}
+    end
   end
   private
   def category_params

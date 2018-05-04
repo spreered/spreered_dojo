@@ -40,7 +40,12 @@
       method: "DELETE",
       dataType: "json",
       success: function(data) {
-        $("[data-id=" + category_id + "]").remove();
+        if(data["message"] == "ok"){
+          $("[data-id=" + category_id + "]").remove();
+        }else{
+          alert("can't delete this category")
+        }
+
       }
     });
   });
