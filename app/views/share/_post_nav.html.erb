@@ -1,0 +1,18 @@
+<ul class="nav nav-pills">
+   <li class="nav-item ">
+    <%if current_page?(root_path)||current_page?(posts_path) %>
+      <%= link_to "All", posts_path , class:"nav-link active"%>
+    <%else%>
+      <%= link_to "All", posts_path , class:"nav-link"%>
+    <%end%>
+  </li>   
+  <% @categories.each do |category| %>
+    <li class="nav-item">
+      <% if @category== category%>
+        <%= link_to category.name, category_path(category),class:"nav-link active"%>
+      <% else %>
+        <%= link_to category.name, category_path(category),class:"nav-link"%>
+      <%end%>
+    </li>
+  <%end%>
+</ul>

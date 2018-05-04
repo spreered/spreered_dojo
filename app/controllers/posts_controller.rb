@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
   def index
     if current_user
-      @q =Post.published.all_user.or(Post.published.friend_post(current_user).friend).ransack(params[:q])
+      @q =Post.published.all_user.or(Post.published.friend_post(current_user)).or(Post.published.myself_post(current_user)).ransack(params[:q])
 
       #@posts = Post.published.all_user.or(Post.published.friend_post(current_user).friend).page(params[:page]).per(20)
       ##@posts = Post.all.can_see_by(current_user).page(params[:page]).per(20)
@@ -13,6 +13,7 @@ class PostsController < ApplicationController
       #@posts = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(20)
     end
       @posts = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(20)
+      @categories = Category.all
   end
 
   def show
@@ -108,7 +109,7 @@ class PostsController < ApplicationController
   end
 
   def check_author
-    if @post.author != current_user && !current_user.admin?
+    if @post.author != current_user
       flash[:alert] = 'access denied'
       redirect_back(fallback_location: root_path)
     end

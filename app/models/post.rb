@@ -17,7 +17,10 @@ class Post < ApplicationRecord
   }
 
   scope :friend_post, -> (user){
-    where('author_id in (?)  ',user.friends.map{|x|x.id})
+    where('author_id in (?) or author_id = ?',user.friends.map{|x|x.id}, user.id).friend
+  }
+  scope :myself_post, ->(user){
+    where('author_id = ?', user.id).myself
   }
 
   def is_collected?(user)
@@ -25,9 +28,11 @@ class Post < ApplicationRecord
   end
 
   def can_see_by?(user)
-    return true if self.all_user?
+    return true if self.all_user?||self.author == user
     if self.friend?
       return user.is_friend?(self.author)
+    else
+      return false
     end
   end
 end

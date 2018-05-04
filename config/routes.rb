@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post :uncollect
     end
   end
+  resources :categories, only:[:show]
   resources :users, only:[:show, :edit, :update] do
     member do
      get :post_page
