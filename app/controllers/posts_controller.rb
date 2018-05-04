@@ -1,16 +1,18 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :collect, :uncollect]
   before_action :check_author, only: [:edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index]
   def index
     if current_user
       @q =Post.published.all_user.or(Post.published.friend_post(current_user).friend).ransack(params[:q])
-      @posts = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(20)
+
       #@posts = Post.published.all_user.or(Post.published.friend_post(current_user).friend).page(params[:page]).per(20)
       ##@posts = Post.all.can_see_by(current_user).page(params[:page]).per(20)
     else
-      @q = Post.published.page(params[:page]).per(20)
-      @posts = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(20)
+      @q = Post.published.all_user.ransack(params[:q])
+      #@posts = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(20)
     end
+      @posts = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(20)
   end
 
   def show
@@ -22,7 +24,7 @@ class PostsController < ApplicationController
       @comment = Comment.new
       @comments = @post.comments
       @post.view_count += 1
-      @post.save!
+      @post.save! 
     end
   end
 

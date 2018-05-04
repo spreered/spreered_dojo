@@ -12,7 +12,7 @@
     <tbody>
       <% @posts.each do |post| %> 
       <tr>
-        <td ><%=post.id%>,<%= post.replies_count.to_i %></td>
+        <td ><%= post.replies_count.to_i %></td>
         <td ><%=content_tag :span, 'friend only' ,class:'badge badge-pill badge-warning' if post.friend?%><%=link_to post.title,post_path(post) %> </td>
         <td ><%= post.updated_at.strftime("%Y-%m-%d") %></td>
         <td ><%= post.view_count.to_i %></td>
