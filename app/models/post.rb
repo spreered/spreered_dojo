@@ -27,7 +27,12 @@ class Post < ApplicationRecord
     self.collect_users.include?(user)
   end
 
+  def is_publish?
+    return !(published_at == nil)
+  end
+
   def can_see_by?(user)
+    return false if !self.is_publish?&&self.author != user
     return true if self.all_user?||self.author == user
     if self.friend?
       return user.is_friend?(self.author)
