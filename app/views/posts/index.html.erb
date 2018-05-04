@@ -3,18 +3,18 @@
       <table class="table mt-3">
     <thead class="">
       <tr>
-        <th scope="col">Replies count</th>
+        <th scope="col"><%=sort_link(@q,:replies_count,'Replies count')%></th>
         <th scope="col">Title</th>
-        <th scope="col">Last replied at</th>
-        <th scope="col">Viewed count</th>
+        <th scope="col"><%=sort_link(@q,:updated_at,'Last replied at')%></th>
+        <th scope="col"><%=sort_link(@q,:view_count,'Viewed count')%></th>
       </tr>
     </thead>
     <tbody>
       <% @posts.each do |post| %> 
       <tr>
-        <td ><%= post.replies_count.to_i %></td>
+        <td ><%=post.id%>,<%= post.replies_count.to_i %></td>
         <td ><%=content_tag :span, 'friend only' ,class:'badge badge-pill badge-warning' if post.friend?%><%=link_to post.title,post_path(post) %> </td>
-        <td ><%= post.updated_at %></td>
+        <td ><%= post.updated_at.strftime("%Y-%m-%d") %></td>
         <td ><%= post.view_count.to_i %></td>
       </tr>
       <%end%>

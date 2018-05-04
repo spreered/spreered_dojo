@@ -3,10 +3,13 @@ class PostsController < ApplicationController
   before_action :check_author, only: [:edit, :update, :destroy]
   def index
     if current_user
-      @posts = Post.published.all_user.or(Post.published.friend_post(current_user).friend).page(params[:page]).per(20)
+      @q =Post.published.all_user.or(Post.published.friend_post(current_user).friend).ransack(params[:q])
+      @posts = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(20)
+      #@posts = Post.published.all_user.or(Post.published.friend_post(current_user).friend).page(params[:page]).per(20)
       ##@posts = Post.all.can_see_by(current_user).page(params[:page]).per(20)
     else
-      @posts = Post.published.page(params[:page]).per(20)
+      @q = Post.published.page(params[:page]).per(20)
+      @posts = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(20)
     end
   end
 
