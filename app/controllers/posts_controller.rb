@@ -108,7 +108,7 @@ class PostsController < ApplicationController
   end
 
   def check_author
-    if @post.author != current_user
+    if @post.author != current_user && !current_user.admin?
       flash[:alert] = 'access denied'
       redirect_back(fallback_location: root_path)
     end
