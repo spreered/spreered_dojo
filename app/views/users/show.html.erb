@@ -3,23 +3,7 @@
 
   <div class="row">
 
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">My Post</a>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'My Comment', comment_page_user_path(@user) , class:'nav-link'%>
-      </li>
-       <li class="nav-item">
-        <%= link_to 'My Collect', collect_page_user_path(@user) , class:'nav-link'%>
-      </li>
-       <li class="nav-item">
-        <%= link_to 'My Draft', draft_page_user_path(@user) , class:'nav-link'%>
-      </li>
-       <li class="nav-item">
-        <%= link_to 'My Friend', friend_page_user_path(@user) , class:'nav-link'%>
-      </li>
-    </ul>
+    <%=render partial:'user_nav' %>
     <table class="table mt-3 mb-5">
       <% @posts.each do |post| %>
         <tr>

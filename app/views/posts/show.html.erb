@@ -37,7 +37,7 @@
         <div class="post-show-content"><%=simple_format comment.content %></div>
       </div>
       <div class="float-right">
-        <%= render partial:'comment_control', locals:{comment: comment}%>
+        <%= render partial:'comment_control', locals:{post:@post, comment: comment}%>
       </div>
 
     </div>

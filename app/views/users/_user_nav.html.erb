@@ -1,0 +1,42 @@
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <% if current_page?(post_page_user_path(@user)) %>
+      <%= link_to 'My Post', post_page_user_path(@user) , class:'nav-link active'%>
+    <%else%>
+      <%= link_to 'My Post', post_page_user_path(@user) , class:'nav-link'%>
+    <%end%>
+  </li>
+  <li class="nav-item">
+    <% if current_page?(comment_page_user_path(@user)) %>
+      <%= link_to 'My Comment', comment_page_user_path(@user) , class:'nav-link active'%>
+    <%else%>
+      <%= link_to 'My Comment', comment_page_user_path(@user) , class:'nav-link'%>
+    <%end%>
+
+  </li>
+  
+  <%if current_user == @user%>
+  <li class="nav-item">
+    <% if current_page?(collect_page_user_path(@user)) %>
+      <%= link_to 'My Collect', collect_page_user_path(@user) , class:'nav-link active'%>
+    <%else%>
+      <%= link_to 'My Collect', collect_page_user_path(@user) , class:'nav-link'%>
+    <%end%>
+  </li>
+   <li class="nav-item">
+    <% if current_page?(draft_page_user_path(@user)) %>
+      <%= link_to 'My Draft', draft_page_user_path(@user) , class:'nav-link active'%>
+    <%else%>
+      <%= link_to 'My Draft', draft_page_user_path(@user) , class:'nav-link'%>
+    <%end%>
+  </li>
+   <li class="nav-item">
+    <% if current_page?(friend_page_user_path(@user)) %>
+      <%= link_to 'My Friend', friend_page_user_path(@user) , class:'nav-link active'%>
+    <%else%>
+      <%= link_to 'My Friend', friend_page_user_path(@user) , class:'nav-link'%>
+    <%end%>
+  </li>
+  <%end%>
+</ul>
