@@ -65,13 +65,16 @@ class Api::V1::PostsController < ApiController
 
   def destroy
     @post = Post.find_by(id:params[:id])
-    @post.destroy
-    render json: {
-      message: "post delete!"
-    }
-  end
-
-  def delete
+    if @post.author == current_user || current_user.admin?
+      @post.destroy
+      render json: {
+        message: "post delete!"
+      }
+    else
+      render json: {
+        message: "access denied"
+      }
+    end
   end
 
 
