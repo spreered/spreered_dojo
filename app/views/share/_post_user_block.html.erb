@@ -1,5 +1,6 @@
 <%=rect_avatar user.avatar %>
-<div class="user-show-name text-center mt-2 " data-user = <%= user.id %> ><h5><%=link_to user.name, user_path(user) %></h5> 
+<div class="user-show-name text-center mt-2 " data-user = <%= user.id %> >
+  <h5><%=link_to user.name, user_path(user) %></h5> 
   <div class="friendships_btn">
     <%= render partial: '/share/friendship_btn' , locals:{user: user} %>
   </div>

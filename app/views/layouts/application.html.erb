@@ -34,11 +34,7 @@
         <li class="nav-item">
           <span class="navbar-text"><%=  current_user.email %></span>   
         </li>
-<!--         <li class="nav-item">
-          <span class="navbar-text"><%# if current_user %>
-          你的 API Token：<code><%#= current_user.authentication_token  %></code>
-      <%# end %></span>   
-        </li>  -->
+
         <li class="nav-item">
           <%=link_to 'profile', user_path(current_user), class: 'nav-link' %>
         </li> 

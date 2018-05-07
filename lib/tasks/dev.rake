@@ -23,7 +23,8 @@ namespace :dev do
   task fake_post: :environment do 
     Post.destroy_all
     User.all.each do |user|
-      3.times do |i|
+      post_count = rand(3..6)
+      post_count.times do |i|
         Post.create!(
           title:FFaker::Lorem::sentence(4),
           author_id: user.id,
@@ -32,9 +33,11 @@ namespace :dev do
           published_at: Time.zone.now
         )
       end
+      puts "user #{user.name} get #{post_count} public posts"
     end
     User.all.each do |user|
-      2.times do |i|
+      post_count = rand(1..3)
+      post_count.times do |i|
         Post.create!(
           title:"Friend only post"+FFaker::Lorem::sentence(4),
           author_id: user.id,
@@ -43,6 +46,7 @@ namespace :dev do
           published_at: Time.zone.now
         )
       end
+      puts "user #{user.name} get #{post_count} friend only posts"
     end
     User.all.each do |user|
       2.times do |i|
@@ -54,6 +58,7 @@ namespace :dev do
           published_at: Time.zone.now
         )
       end
+      puts "user #{user.name} get 2 self only posts"
     end
     puts "now have#{Post.count} post"
   end
@@ -61,7 +66,8 @@ namespace :dev do
   task fake_comment: :environment do   
     Comment.destroy_all
     Post.published.all_user.each do |post|
-      users = User.all.sample(5)
+      replies_num = rand(3..10)
+      users = User.all.sample(replies_num)
       users.each do |user|
         post.comments.create(
           author_id: user.id,
@@ -97,6 +103,28 @@ namespace :dev do
     end
     puts "now have #{Collect.count} collects"
   end
+
+  task fake_categories: :environment do
+    categories_list = [
+      'Sport',
+      'Programming',
+      'Movie',
+      'Literature',
+      'Comics',
+      'political'
+    ]
+    Category.destroy_all
+    categories_list.each do |category_name|
+      category = Category.create!(name: category_name)
+      puts "create category #{category.name}"
+    end
+    Post.find_each do |post|
+      category = Category.all.sample
+      post.categories <<  category
+      puts "post #{post.title} add #{category.name} category"
+    end
+  end
+
   task update_replies_count: :environment do
     Post.all.each do |post|
       post.replies_count = post.comments.count
