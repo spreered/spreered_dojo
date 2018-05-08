@@ -45,9 +45,12 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.3'
 gem 'bootstrap', '~> 4.1.0'
 gem 'bootstrap4-kaminari-views'
 gem 'ransack'
+gem 'capistrano-rvm'
 
 
 group :development, :test do
+  gem 'capistrano-rails'
+  gem 'capistrano-passenger'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
@@ -65,7 +68,8 @@ group :development do
 end
 
 group :production do
-  gem 'mysql2', '< 0.5'
+  #gem 'mysql2', '< 0.5'
+  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
