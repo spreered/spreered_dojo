@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy, :collect, :uncollect]
-  before_action :check_author, only: [:edit, :update, :destroy]
+  before_action :check_author, only: [:edit, :update]
   skip_before_action :authenticate_user!, only: [:index]
   def index
     if current_user
@@ -58,9 +58,14 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    flash[:notice] = '文章已刪除'
-    redirect_to posts_path
+    if @post.author == current_user || current_user.admin?
+      @post.destroy
+      flash[:notice] = '文章已刪除'
+      redirect_to posts_path
+    else
+      flash[:alert] = 'access denied'
+      redirect_back(fallback_location: root_path)
+    end
   end
   def collect
     if @post.is_collected?(current_user)
