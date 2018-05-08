@@ -13,7 +13,7 @@
             </div>
             </th>
           <td><%=comment.updated_at%></td>
-          <td><%= render partial:'/posts/comment_control', locals:{comment: comment} %></td>
+          <td><%= render partial:'/posts/comment_control', locals:{comment: comment, post: comment.post} %></td>
         </tr>
       <%end%>
     </table>
