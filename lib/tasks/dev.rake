@@ -96,7 +96,7 @@ namespace :dev do
   task fake_collect: :environment do
     Collect.destroy_all
     User.all.each do |user|
-      posts = Post.published.all_can_see.sample(10)
+      posts = Post.published.all_user.sample(10)
       posts.each do |post|
         user.collect_posts<< post
       end
@@ -142,5 +142,22 @@ namespace :dev do
       user.update(chatterbox_count: count)
       puts "user : #{user.name} chatterbox_count: #{user.chatterbox_count}"
     end
+  end
+
+  task fake_all_production: :environment do
+    system 'bin/rake RAILS_ENV=production dev:fake_user'  
+    system 'bin/rake RAILS_ENV=production dev:fake_post'  
+    system 'bin/rake RAILS_ENV=production dev:fake_comment'  
+    system 'bin/rake RAILS_ENV=production dev:fake_friend'   
+    system 'bin/rake RAILS_ENV=production dev:fake_collect'   
+    system 'bin/rake RAILS_ENV=production dev:fake_categories'   
+  end
+  task fake_all: :environment do
+    system 'rails dev:fake_user'  
+    system 'rails dev:fake_post'  
+    system 'rails dev:fake_comment'  
+    system 'rails dev:fake_friend'   
+    system 'rails dev:fake_collect'   
+    system 'rails dev:fake_categories'   
   end
 end
