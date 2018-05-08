@@ -6,10 +6,11 @@ class Admin::CategoriesController < Admin::BaseController
   end
   def create
     @category = Category.new(category_params)
-    if @category.save!
+    if @category.save
       redirect_to admin_categories_path
     else
-      render  admin_categories_path
+      @categories = Category.all
+      render :index
     end
   end
   def edit
