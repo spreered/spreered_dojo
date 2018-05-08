@@ -12,7 +12,7 @@ class PostsController < ApplicationController
       @q = Post.published.all_user.ransack(params[:q])
       #@posts = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(20)
     end
-      @posts = @q.result(distinct: true).order(id: :desc).page(params[:page]).per(20)
+      @posts = @q.result(distinct: true).order(:id).page(params[:page]).per(20)
       @categories = Category.all
   end
 
