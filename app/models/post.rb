@@ -42,7 +42,11 @@ class Post < ApplicationRecord
     end
   end
   def update_replied_at!
-    self.replied_at = self.comments.last.created_at
+    if self.comments.empty?
+      self.replied_at = self.created_at
+    else
+      self.replied_at = self.comments.last.created_at
+    end
     self.save
   end
 
