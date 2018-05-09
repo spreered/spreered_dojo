@@ -8,7 +8,7 @@ class Api::V1::PostsController < ApiController
           title: post.title,
           replies_count: post.replies_count,
           view_count: post.view_count,
-          last_reply: post.updated_at
+          last_reply: post.replied_at
          }
        end
     }
