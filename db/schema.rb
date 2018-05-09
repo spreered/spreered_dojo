@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180505145311) do
+ActiveRecord::Schema.define(version: 20180509030121) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20180505145311) do
     t.integer "view_count", default: 0, null: false
     t.integer "who_can_see", default: 0, null: false
     t.datetime "published_at"
+    t.datetime "replied_at"
     t.index ["author_id"], name: "index_posts_on_author_id"
   end
 

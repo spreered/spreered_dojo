@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   mount_uploader :image, PostImageUploader
+  after_create_commit :set_replied_at
   validates_presence_of :title, :content
   belongs_to :author, class_name: 'User'
   has_many :comments
@@ -39,5 +40,12 @@ class Post < ApplicationRecord
     else
       return false
     end
+  end
+
+  private
+
+  def set_replied_at
+    self.replied_at = Time.zone.now
+    self.save
   end
 end

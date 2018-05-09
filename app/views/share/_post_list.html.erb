@@ -8,7 +8,7 @@
       <tr>
         <th scope="col"><%=sort_link(@q,:replies_count,'Replies count')%></th>
         <th scope="col">Title</th>
-        <th scope="col"><%=sort_link(@q,:updated_at,'Last replied at')%></th>
+        <th scope="col"><%=sort_link(@q,:replied_at,'Last replied at')%></th>
         <th scope="col"><%=sort_link(@q,:view_count,'Viewed count')%></th>
       </tr>
     </thead>
@@ -17,7 +17,7 @@
       <tr>
         <td ><%= post.replies_count.to_i %></td>
         <td ><%=content_tag :span, 'friend only' ,class:'badge badge-pill badge-warning' if post.friend?%><%=content_tag :span, 'self only' ,class:'badge badge-pill badge-info' if post.myself?%><%=link_to post.title,post_path(post) %> </td>
-        <td ><%= post.updated_at.strftime("%Y-%m-%d") %></td>
+        <td ><%= post.replied_at.strftime("%Y-%m-%d") %></td>
         <td ><%= post.view_count.to_i %></td>
       </tr>
       <%end%>
