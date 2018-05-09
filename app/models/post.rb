@@ -41,6 +41,10 @@ class Post < ApplicationRecord
       return false
     end
   end
+  def update_replied_at!
+    self.replied_at = self.comments.last.created_at
+    self.save
+  end
 
   private
 
