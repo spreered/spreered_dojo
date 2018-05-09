@@ -1,7 +1,7 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <div class="row">
-      <div class="col-3">
+      <div class="col-3 " data-user = <%=user.id%> >
         <div class="user-show-avatar">
           <div class="imgbox">    
           <!--設定寬度-->
@@ -14,8 +14,13 @@
               </div>
             </div>
           </div>
-      </div>
-        <div class="user-show-name text-center mt-2 "><h3><%= user.name%> </h3> </div>
+        </div>
+        <div class="user-show-name text-center mt-2 "><h3><%= user.name%> </h3> 
+          <div class="friendships_btn">
+            <%= render partial: '/share/friendship_btn' , locals:{user: user} %>
+          </div>
+        </div>
+
       </div>
       <div class="col-9">
         <div class="user-show-description"><%=simple_format user.description%></div> 
